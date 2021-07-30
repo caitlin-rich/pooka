@@ -27,7 +27,11 @@ export default class Title extends Phaser.Scene {
         "Press SPACE to Start",
         style
       )
+
+      this.add.text(360, 390, "C. Rich 2021", {fontSize: 8, color: '#999'})
+
     }
+
     
     update(){
         if (this.cursors.space.isDown) {
