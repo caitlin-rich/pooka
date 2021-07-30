@@ -1,15 +1,21 @@
 import Phaser from './lib/phaser.js'
 import Game from './scenes/Game.js'
+import Title from './scenes/Title.js'
 
-export default new Phaser.Game({
+const phaserConfig = {
     type: Phaser.AUTO,
     width: 600, 
     height: 400,
-    scene: Game,
+    scene: [Title, Game],
     physics: {
         default: 'arcade',
         arcade: {
             debug: false
         }
     }
-})
+}
+
+
+const game = new Phaser.Game(phaserConfig)
+
+export default game

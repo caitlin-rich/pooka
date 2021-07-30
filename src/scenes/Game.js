@@ -8,6 +8,7 @@ export default class Game extends Phaser.Scene {
     this.treats;
     this.treatsCollected = 0;
     this.treatsCollectedText;
+    this.pickUpTreat;
   }
 
   preload() {
@@ -148,6 +149,8 @@ export default class Game extends Phaser.Scene {
     );
 
     this.cameras.main.startFollow(this.player, true);
+
+    this.pickUpTreat = this.sound.add('pickup', {volume: 0.5, loop: false})
   }
 
   update() {
@@ -179,7 +182,7 @@ export default class Game extends Phaser.Scene {
   }
 
   handleCollectTreats(player, treat) {
-   
+    this.pickUpTreat.play()
     this.treats.killAndHide(treat);
     this.physics.world.disableBody(treat.body);
     this.treatsCollected++;
@@ -187,9 +190,13 @@ export default class Game extends Phaser.Scene {
       this.treatsCollectedText.text = `You have eaten ${this.treatsCollected} treat. Yay!`;
       return;
     }
-    if (this.treatsCollected === 30) {
-      this.treatsCollectedText.text = `You found all the treats!`;
+    if (this.treatsCollected === 25) {
+      this.treatsCollectedText.text = `You have eaten ${this.treatsCollected} treats - that's most of them! The others might be out of reach...`;
       return;
+    }
+    if (this.treatsCollected === 30) {
+        this.treatsCollectedText.text = 'You found all the treats! WOW!'
+        return;
     }
     this.treatsCollectedText.text = `You have eaten ${this.treatsCollected} treats. Yay!`;
   }

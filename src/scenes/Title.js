@@ -1,9 +1,8 @@
 import Phaser from "../lib/phaser.js";
-import Game from './Game.js'
 
 export default class Title extends Phaser.Scene {
     constructor(){
-        super()
+        super("title")
         this.titleText = ''
     }
 
@@ -11,6 +10,7 @@ export default class Title extends Phaser.Scene {
         this.load.image('title', 'assets/pookatitle.png');
         this.load.image('pooka', 'assets/pooka_drawing.png')
         this.cursors = this.input.keyboard.createCursorKeys();
+
 
     }
 
@@ -31,7 +31,7 @@ export default class Title extends Phaser.Scene {
     
     update(){
         if (this.cursors.space.isDown) {
-            this.scene.switch(Game)
+            this.scene.start("game")
         }
     }
 }
